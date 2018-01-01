@@ -1,0 +1,16 @@
+<div id="todoApp">
+  <h2>Todo with Componet</h2>
+  <input type="text" v-model="todo" v-on:keyup.enter="addTodo">
+  <span>doing {{doings}} / {{todos.length}} task</span>
+  <div>
+    <todo-template v-for="t in todos" :t="t" @todochanged="count"></todo-template>
+  </div>
+</div>
+
+<script type="text/x-template" id="todo-template">
+  <div v-bind:class="['todo-default', doing ? 'todo-doing' : '']"
+       v-on:click="begin">
+    {{t.name}}
+  </div>
+</script>
+

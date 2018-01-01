@@ -1,0 +1,21 @@
+<div id="issues">
+	<h2>Latest {{repository}} Issues</h2>
+	<div>
+	  <input type="text" v-model="repository" >
+	</div>
+	<div>
+	  <input type="text" v-model="searchText">
+	  <div v-show="hasIssue">
+	    <div v-for="issue in filtered_issues"
+		 class="issue-defults">
+	      <a :href-"issue.html_url" target="_blank">
+	      </a><br/>	      
+	      <span>#{{issue.number}} at {{issue.updated_at | formatDate}}</span>   
+	    </div>
+	  </div>
+	<div v-else>
+	  The repository {{repository}} dose not exist!
+	</div>
+        </div>
+</div>
+
