@@ -1,0 +1,16 @@
+<script src="https://cdn.jsdelivr.net/vue/2.0.3/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/vue.router/2.0.1/vue-router.min.js"></script>
+
+<div id="app">
+  <router-view></router-view>
+</div>
+
+<div id="app">
+  <router-link to="/top">toppage</router-link>
+  <router-link to="/users">user_lists</router-link>
+  <router-view></router-view>
+</div>
+
+<router-link :to="{ name: 'user', params: { userId: 123 }}}">user_more</router-link>
+
+

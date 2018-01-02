@@ -1,0 +1,39 @@
+var User = {
+  template:
+    '<div class="user">' +
+      '<h2>your_user_id: {{ $route.params.userId }} </h2>' +
+      '<router-link :to="\'/user/\' + $route.params.userId + \'/profile\'">
+      '<router-link :to="\'/user/\' + $route.params.userId + \'/posts\'">view</router-link>' +
+    '<div>'
+}
+
+  var UserProfile = {
+    template:
+      '<div class="user-profile">' +
+        '<h3> {{ $route.params.userId }}'</h3>
+      '</div>'
+  }
+
+  var UserPosts = {
+    template:
+      '<div class="user-posts">' +
+        '<h3> {{ $route.params.uyserId }} </h3>'
+      '</div>'
+  }
+
+  var router = new VueRouter({
+    routes: [
+    {
+      path: '/user/:userId',
+      name: 'user',
+      component: User,
+      children: [
+        {
+	  path: 'posts',
+	  component: UserPosts
+	}
+      ]
+    }
+    ]
+  })
+
