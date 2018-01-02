@@ -1,0 +1,22 @@
+<section class="section">
+<div class="container">
+	<div class=columns id="board">
+		<div class="column status-1">
+			<transition-group name="fade">
+			<tsk-card :tsk="tsk" v-for="tsk in tskOpen" key="tsk"><tsk-card>
+			</transition-group>
+		</div>
+		<div class="column status-2">
+		<transition-group name="fade">
+			<tsk-card :tsk="tsk" v-for="ts in tskDoing" key="tsk"><tsk-card>
+		</transition-group>
+		</div>
+		<div class="column status-3">
+			<transition-group name="fade">
+				<tsk-card :tsk="tsk" v-for="tsk in tskClosed" key="tsk"><tsk-card>
+			</transition-group>
+		</div>
+	</div>
+</div>
+</section>
+

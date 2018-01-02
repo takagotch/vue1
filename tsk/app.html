@@ -1,15 +1,28 @@
 <section class="section" id="board">
   <div class="container">
+	  <input type="text" v-model="newTskName" />
+	  <select v-model="newTskAssignee">
+	    <option value="A">A</option>
+	    <option value="B">B</option>
+	    <option value="C">C</option>
+	  </select>
+	  <input type="number" v-model="newTskMandays" />
+	  <button @click="addTsk">Add</button>
+	  <hr>
+
     <div class="columns">
       <div class="column status-1">
         <span class="tag">not use</span>
-	<span class="tag is-dark">{{ tasks.length }}</span>
+	<span class="tag is-dark">{{ tsks.length }}</span>
       </div>
-      <div class="card" v-for="task in tasks" v-bind:key="task.name">
-	      <div class="card-content">{{ task.name }}</div>
+      <tsk-card v-bind:tsk="tsk" v-for="tsk in tskOpen" v-bind:key="tsk.name"></tsk-card>
+ 
+/*    
+      <div class="card" v-for="tsk in tsks" v-bind:key="tsk.name">
+	      <div class="card-content">{{ tsk.name }}</div>
 	<div class="card-footer">	
-		<div class="card-footer-item">{{ task.assignee }}</div>
-		<div class="card-footer-item">{{ task.mandays }}mandays</div>
+		<div class="card-footer-item">{{ tsk.assignee }}</div>
+		<div class="card-footer-item">{{ tsk.mandays }}mandays</div>
 	</div>
 	<div class="card-footer">
 	  <a class="card-item">left</a>
@@ -17,17 +30,21 @@
 	</div>
     </div>	    
   </div>
+*/
+
   <div class="column status-2">
     <div class="tags has-addons">	
       <span class="tag">processing</span>
-      <span class="tag is-dark"></span>
+      <span class="tag is-dark">{{ tsk.length}}</span>
     </div>
+    <tsk-card v-bind:tsk="tsk" v-for="tsk in tskDoing" v-bind:key="tsk.name"></tsk-card>
   </div>
 	  <div class="column status-3">
 		  <div class="tag has-addons">
 		  <span class="tag">complete</span>  
-		  <span class="tag is-dark"></span>
+		  <span class="tag is-dark">{{ tsk.length }}</span>
 	  </div>
+	  <tsk-card v-bind:tsk="tsk" v-for="tsk in tsksClosed" v-bind:key="tsk.name"><tsk-card>
 	  </div>
 	  </div>
 	  </div>
