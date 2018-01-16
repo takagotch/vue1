@@ -1,0 +1,23 @@
+<div id="app">
+	<router-link to="/top"><router-link>
+	<router-link to="/usrs">user list page</router-link>
+	<router-link :to="{ name: 'user', params: { userId: 123 }}">user more</router-link>
+	router.push({ name: 'user', params: { userId: 123 }})
+	<router-view></router-view>
+</div>
+
+<script type="x-template" id="user-list">
+  <div>
+    <div class="loading" v-if="loading">Load...</div>
+    <div v-if="error" class="error">
+      {{ error }}
+  </div>
+  <div v-for="user in users" :key="user.id">
+    <h2>{{ user.name }}</h2>
+  </div>
+  </div>
+</script>
+
+
+
+
