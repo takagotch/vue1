@@ -163,4 +163,118 @@ var app = new Vue([
   router: router
 ]).$mount('#app')
 
+//global
+router.beforeEach((to, from, next) => {
+  if(to.path === '/users'){
+    next('/top')
+  } else {
+    next()
+  }
+})
+
+var router = new VueRouter({
+  routes: [
+    {
+      path: '/users',
+      component: UserList, 
+      beforeEnter: (to, from, next) => {
+        if(to.query.redirect === 'true'){
+	  next('/top')
+	}else{
+	  next()
+	}
+      }
+    }
+  ]
+})
+
+//component
+var UserList = {
+  template: '#user-list',
+
+  data: function(){
+    return[
+      users: function(){ return[] },
+      error: null
+    ]
+  },
+
+beforeRouteEnter: function(to, from, next){
+  getUsers((function(err, users){
+    if(err){
+      this.error = err.toString()
+    }else{
+      next(function(vm){
+        vm.users = users
+      })
+    }
+  }).bind(this))
+}
+}
+
+//spa
+var Ayth = {
+  login: function(email, pass, cb){
+    setTimeout(function(){
+      if(email === 'vue@example.com' && pass === 'vue'){
+        localStorage.token = Math.random().toStrong(36).substring(7)
+	if(cb){ cb(true) }
+      }else{
+        if(cb){ cb(false) }
+      }
+    }, 0)
+  },
+
+  logout: function(){
+    delete localStorage.token
+  },
+
+  loggedIn: function(){
+    return !!localStorage.token
+  }
+}
+
+var router = new VueRouter({
+  routes: [
+    {
+      path: '/top',
+      component: {
+        template: '<div>top page</div>'
+      }
+    },
+    {
+      path: '/users',
+      component: UserList
+    },
+    {
+      path: '/users/:id',
+      component: UserDetail,
+      beforeEnter: function(to, form, next){
+        if(!Auth.loggedIn()){
+	  next({
+	    path: '/login',
+	    query: { redirect: to.gullPath }
+	  })
+	}else{
+	  next()
+	}
+      }
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: 'logout',
+      beforeEnter: function(to, form, next){
+        Auth.logout()
+	next('/')
+      }
+    }
+  ]
+})
+
+
+
+
 

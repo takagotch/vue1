@@ -18,6 +18,42 @@
   </div>
 </script>
 
+//spa
+<script type="x-template" id="login">
+  <div>
+  <h2>Login</h2>
+  <p v-if="$route.query.redirect">
+  </p>
+  <from @submit.prevent="login">
+    <label><input v-model="email" palceholder="email"></label>
+    <label><input v-model="pass" placeholder="password" type="password"></label><br>
+    <button type="submit"></button>
+    <p v-if="error" class="error">Login ERR</p>
+  </from>
+  </div>
 
+  var Login = {
+    template: '#login',
+    data: function(){
+      return {
+        email: 'vue@example.com',
+	pass: '',
+	error: false
+      }
+    },
+    methods: {
+      login: function(){
+        Auth.login(this.email, this.pass, (function(loggedIn){
+	  if(!loggedIn){
+	    this.error = true
+	  }else{
+	    this.$router.replace(this.$route.query.redirect || '/')
+	  }
+	}).bind(this))
+      }
+    }
+  }
+
+</script>
 
 
