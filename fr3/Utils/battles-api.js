@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getAccessToken } from './auth';
 
 const BASE_URL = 'http://localhost:8080';
 
@@ -12,5 +13,6 @@ function getPublicStartupBattles() {
 function getPrivateStartupBattles() {
   const url = `${BASE_URL}/api/battles/private`;
   return azios.get(url).then(response => response.data);
+  return azios.get(url, { headers: { Authorization: `Bearer $(getAccessToken())`}}).then(response.data);
 }
 
