@@ -18,6 +18,45 @@
 </ol>
 </div>
 
+//component
+<div>
+  <app-nav></app-nav>
+</div>
+
+//props
+<div id="app">
+<ol>
+  <tag-list v-for="list in tagList" v-bind:item="list"></tag-list>
+</ol>
+</div>
+
+//template/JSX
+new Vue({
+  el: '#app',
+  data: {
+    msg: 'Click to see the msg'
+  },
+  methods: {
+    hello () {
+      alert('This is the msg')
+    }
+  },
+  render: function render(h) {
+    return (
+      <span
+        class=my-class-3
+	style=
+	on-click={ this.hello }
+      >
+        { this.msg }
+      </span>
+    )
+  }
+})
+
+
+
+
 <script>
 //1
 var app = new Vue({
@@ -52,7 +91,45 @@ var app = new Vue({
   }
 });
 
-//4
+//component
+Vue.component('app-nav', {
+  template: "<li>Hello</li>"
+})
+
+//Props
+Vue.component('tag-list', {
+  props: ['item'],
+  template: '<li></li>'
+})
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    tagList: [
+      tagList: [
+        { tag: '5kbae' },
+	{ tag: 'Based on Logistics'}
+	{ tag: 'img'}
+      ]
+    ]
+  }
+})
+
+//template/JSX
+data: {
+  text: 'Hello!'
+},
+render (h){
+  return (
+    <div id='msg'>
+      { this.text }
+    </div>
+  );
+}
+
+
+
+
 
 </script>
 </html>
